@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layanan Pengaduan Sekolah</title>
+    <!-- Tailwind CSS untuk styling yang modern dan responsif -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col items-center justify-center py-10 px-4">
+
+    <!-- Container Utama -->
+    <div class="w-full max-w-lg bg-white rounded-2xl shadow-xl overflow-hidden">
+        
+        <!-- Header -->
+        <div class="bg-blue-600 text-white py-6 px-8 text-center">
+            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner">
+                <i class="fas fa-school text-3xl text-blue-600"></i>
+            </div>
+            <h1 class="text-2xl font-bold tracking-wide">Layanan Pengaduan</h1>
+            <p class="text-blue-100 text-sm mt-1">Sampaikan aspirasi, kritik, atau laporan Anda dengan aman.</p>
+        </div>
+
+        <!-- Form Section -->
+        <div class="p-8">
+            <form id="pengaduanForm" onsubmit="kirimKeWhatsApp(event)">
+                
+                <!-- Input Nama -->
+                <div class="mb-5">
+                    <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
+                    <input type="text" id="nama" required placeholder="Masukkan nama Anda (Boleh Samaran)" 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200 text-sm">
+                </div>
+
+                <!-- Input Status/Peran -->
+                <div class="mb-5">
+                    <label for="status" class="block text-sm font-medium text-gray-700 mb-2">Status / Peran</label>
+                    <select id="status" required 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200 text-sm bg-white">
+                        <option value="" disabled selected>Pilih status Anda...</option>
+                        <option value="Siswa">Siswa</option>
+                        <option value="Guru / Staf">Guru / Staf</option>
+                        <option value="Orang Tua / Wali">Orang Tua / Wali</option>
+                        <option value="Masyarakat Umum">Masyarakat Umum</option>
+                    </select>
+                </div>
+
+                <!-- Kategori Pengaduan -->
+                <div class="mb-5">
+                    <label for="kategori" class="block text-sm font-medium text-gray-700 mb-2">Kategori Laporan</label>
+                    <select id="kategori" required 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200 text-sm bg-white">
+                        <option value="" disabled selected>Pilih kategori...</option>
+                        <option value="Fasilitas Sekolah">Fasilitas Sekolah (Gedung, Toilet, Kelas)</option>
+                        <option value="Akademik & Pembelajaran">Akademik & Pembelajaran</option>
+                        <option value="Perundungan (Bullying)">Perundungan (Bullying) / Keamanan</option>
+                        <option value="Pungutan Liar">Pungutan Liar</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+
+                <!-- Isi Laporan -->
+                <div class="mb-6">
+                    <label for="laporan" class="block text-sm font-medium text-gray-700 mb-2">Isi Laporan / Pengaduan</label>
+                    <textarea id="laporan" rows="4" required placeholder="Jelaskan secara detail kejadian, waktu, atau informasi terkait laporan Anda..." 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200 text-sm resize-none"></textarea>
+                </div>
+
+                <!-- Tombol Submit -->
+                <button type="submit" 
+                    class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition duration-300 shadow-md transform hover:-translate-y-0.5">
+                    <i class="fab fa-whatsapp text-xl"></i>
+                    Kirim Laporan via WhatsApp
+                </button>
+            </form>
+
+            <div class="mt-6 text-center text-xs text-gray-500 flex items-center justify-center gap-2">
+                <i class="fas fa-lock"></i>
+                Laporan Anda akan dikirimkan secara pribadi ke admin sekolah.
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript untuk memproses form dan membuka WhatsApp -->
+    <script>
+        function kirimKeWhatsApp(event) {
+            // Mencegah halaman reload saat form disubmit
+            event.preventDefault();
+
+            // Mengambil nilai dari form
+            const nama = document.getElementById('nama').value;
+            const status = document.getElementById('status').value;
+            const kategori = document.getElementById('kategori').value;
+            const laporan = document.getElementById('laporan').value;
+
+            // Mengatur nomor tujuan (085753987438 diubah menjadi format internasional 6285753987438)
+            const nomorWhatsApp = "6285753987438";
+
+            // Membuat format pesan
+            const pesan = `*LAPORAN PENGADUAN SEKOLAH*%0A%0A` +
+                          `*Nama:* ${nama}%0A` +
+                          `*Status:* ${status}%0A` +
+                          `*Kategori:* ${kategori}%0A%0A` +
+                          `*Isi Laporan:*%0A${laporan}%0A%0A` +
+                          `_Pesan ini dikirim secara otomatis melalui Website Pengaduan Sekolah._`;
+
+            // Membuat link WhatsApp API
+            const linkWhatsApp = `https://wa.me/${nomorWhatsApp}?text=${pesan}`;
+
+            // Membuka link WhatsApp di tab baru
+            window.open(linkWhatsApp, '_blank');
+        }
+    </script>
+</body>
+</html>

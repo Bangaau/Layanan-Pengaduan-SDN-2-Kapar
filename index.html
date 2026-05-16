@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Layanan Pengaduan Sekolah</title>
+    <title>Layanan Pengaduan - SDN 2 Kapar</title>
     <!-- Tailwind CSS untuk styling yang modern dan responsif -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -19,17 +19,26 @@
     <!-- Container Utama -->
     <div class="w-full max-w-lg bg-white rounded-2xl shadow-xl overflow-hidden">
         
-        <!-- Header -->
-        <div class="bg-blue-600 text-white py-6 px-8 text-center">
-            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner">
-                <i class="fas fa-school text-3xl text-blue-600"></i>
+        <!-- Header dengan Identitas Sekolah -->
+        <div class="bg-blue-600 text-white py-8 px-6 text-center">
+            <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg border-4 border-blue-400">
+                <i class="fas fa-school text-4xl text-blue-600"></i>
             </div>
-            <h1 class="text-2xl font-bold tracking-wide">Layanan Pengaduan</h1>
-            <p class="text-blue-100 text-sm mt-1">Sampaikan aspirasi, kritik, atau laporan Anda dengan aman.</p>
+            <h1 class="text-2xl font-bold tracking-wide mb-1">Layanan Pengaduan</h1>
+            <h2 class="text-xl font-semibold text-blue-100 mb-3 drop-shadow-sm">SDN 2 Kapar</h2>
+            
+            <div class="flex items-start justify-center text-xs md:text-sm text-blue-50 bg-blue-700/50 p-3 rounded-lg mx-auto backdrop-blur-sm">
+                <i class="fas fa-map-marker-alt mt-0.5 mr-2 text-red-400 text-lg"></i>
+                <p class="leading-snug text-left">Jl. Mufakat, RT. 03 Desa Kapar, Kec. Murung Pudak, Kab. Tabalong</p>
+            </div>
         </div>
 
         <!-- Form Section -->
         <div class="p-8">
+            <div class="text-center mb-6">
+                <p class="text-gray-600 text-sm">Sampaikan aspirasi, kritik, atau laporan Anda di bawah ini. Kami menjamin kerahasiaan data Anda.</p>
+            </div>
+
             <form id="pengaduanForm" onsubmit="kirimKeWhatsApp(event)">
                 
                 <!-- Input Nama -->
@@ -75,15 +84,15 @@
 
                 <!-- Tombol Submit -->
                 <button type="submit" 
-                    class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition duration-300 shadow-md transform hover:-translate-y-0.5">
+                    class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3.5 px-4 rounded-lg flex items-center justify-center gap-2 transition duration-300 shadow-md transform hover:-translate-y-0.5">
                     <i class="fab fa-whatsapp text-xl"></i>
                     Kirim Laporan via WhatsApp
                 </button>
             </form>
 
             <div class="mt-6 text-center text-xs text-gray-500 flex items-center justify-center gap-2">
-                <i class="fas fa-lock"></i>
-                Laporan Anda akan dikirimkan secara pribadi ke admin sekolah.
+                <i class="fas fa-shield-alt text-green-600"></i>
+                Laporan Anda akan dikirimkan secara langsung ke admin SDN 2 Kapar.
             </div>
         </div>
     </div>
@@ -100,23 +109,28 @@
             const kategori = document.getElementById('kategori').value;
             const laporan = document.getElementById('laporan').value;
 
-            // Mengatur nomor tujuan (085753987438 diubah menjadi format internasional 6285753987438)
+            // Nomor tujuan WhatsApp
             const nomorWhatsApp = "6285753987438";
 
-            // Membuat format pesan
-            const pesan = `*LAPORAN PENGADUAN SEKOLAH*%0A%0A` +
-                          `*Nama:* ${nama}%0A` +
-                          `*Status:* ${status}%0A` +
+            // Membuat format pesan yang terstruktur (termasuk identitas sekolah)
+            const pesan = `*LAPORAN PENGADUAN*%0A` +
+                          `*SDN 2 KAPAR*%0A` +
+                          `-----------------------------------%0A%0A` +
+                          `*Nama Pelapor:* ${nama}%0A` +
+                          `*Status/Peran:* ${status}%0A` +
                           `*Kategori:* ${kategori}%0A%0A` +
                           `*Isi Laporan:*%0A${laporan}%0A%0A` +
-                          `_Pesan ini dikirim secara otomatis melalui Website Pengaduan Sekolah._`;
+                          `-----------------------------------%0A` +
+                          `_Dikirim melalui Website Layanan Pengaduan._`;
 
             // Membuat link WhatsApp API
             const linkWhatsApp = `https://wa.me/${nomorWhatsApp}?text=${pesan}`;
 
-            // Membuka link WhatsApp di tab baru
+            // Membuka link WhatsApp di tab atau jendela baru
             window.open(linkWhatsApp, '_blank');
         }
     </script>
 </body>
 </html>
+
+

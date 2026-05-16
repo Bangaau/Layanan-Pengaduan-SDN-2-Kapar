@@ -3,129 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Layanan Pengaduan - SDN 2 Kapar</title>
-    <!-- Tailwind CSS untuk styling yang modern dan responsif -->
+    <title>Portal Pengaduan - SDN 2 Kapar</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f3f4f6;
         }
+        /* Custom scrollbar for better look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
     </style>
 </head>
-<body class="antialiased min-h-screen flex flex-col items-center justify-center py-10 px-4">
+<body class="antialiased min-h-screen flex flex-col">
 
-    <!-- Container Utama -->
-    <div class="w-full max-w-lg bg-white rounded-2xl shadow-xl overflow-hidden">
+    <!-- Header Section -->
+    <header class="bg-blue-700 text-white shadow-lg relative z-10">
+        <div class="max-w-4xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-center sm:justify-start gap-4">
+                <div class="bg-white p-2 rounded-full shadow-md flex-shrink-0">
+                    <!-- Placeholder for School Logo -->
+                    <i class="ph ph-graduation-cap text-4xl text-blue-700"></i>
+                </div>
+                <div class="text-center sm:text-left">
+                    <h1 class="text-2xl font-bold tracking-tight">SDN 2 Kapar</h1>
+                    <p class="text-blue-100 text-sm mt-1 flex items-center justify-center sm:justify-start gap-1">
+                        <i class="ph ph-map-pin"></i>
+                        Jl. Mufakat RT.3, Desa Kapar, Murung Pudak
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8 w-full">
         
-        <!-- Header dengan Identitas Sekolah -->
-        <div class="bg-blue-600 text-white py-8 px-6 text-center">
-            <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg border-4 border-blue-400">
-                <i class="fas fa-school text-4xl text-blue-600"></i>
-            </div>
-            <h1 class="text-2xl font-bold tracking-wide mb-1">Layanan Pengaduan</h1>
-            <h2 class="text-xl font-semibold text-blue-100 mb-3 drop-shadow-sm">SDN 2 Kapar</h2>
-            
-            <div class="flex items-start justify-center text-xs md:text-sm text-blue-50 bg-blue-700/50 p-3 rounded-lg mx-auto backdrop-blur-sm">
-                <i class="fas fa-map-marker-alt mt-0.5 mr-2 text-red-400 text-lg"></i>
-                <p class="leading-snug text-left">Jl. Mufakat, RT. 03 Desa Kapar, Kec. Murung Pudak, Kab. Tabalong</p>
-            </div>
+        <!-- Welcome Card -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8 text-center sm:text-left">
+            <h2 class="text-xl font-bold text-gray-800 mb-2">Layanan Pengaduan & Aspirasi</h2>
+            <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+                Selamat datang di portal pengaduan resmi SDN 2 Kapar. Kami sangat menghargai setiap masukan, kritik, dan laporan Anda demi kemajuan sekolah kita. Laporan Anda akan dikirimkan secara langsung dan rahasia ke WhatsApp Admin Sekolah.
+            </p>
         </div>
 
         <!-- Form Section -->
-        <div class="p-8">
-            <div class="text-center mb-6">
-                <p class="text-gray-600 text-sm">Sampaikan aspirasi, kritik, atau laporan Anda di bawah ini. Kami menjamin kerahasiaan data Anda.</p>
-            </div>
+        <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden relative">
+            <!-- Decorative top border -->
+            <div class="h-2 w-full bg-gradient-to-r from-blue-500 to-green-400"></div>
+            
+            <div class="p-6 sm:p-8">
+                <form id="pengaduanForm" class="space-y-6">
+                    
+                    <!-- Nama -->
+                    <div>
+                        <label for="nama" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="ph ph-user text-gray-400 text-lg"></i>
+                            </div>
+                            <input type="text" id="nama" name="nama" required placeholder="Masukkan nama Anda (Boleh disamarkan)" 
+                                class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-gray-50 focus:bg-white text-gray-800">
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Anda dapat menggunakan nama samaran jika ingin merahasiakan identitas.</p>
+                    </div>
 
-            <form id="pengaduanForm" onsubmit="kirimKeWhatsApp(event)">
-                
-                <!-- Input Nama -->
-                <div class="mb-5">
-                    <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
-                    <input type="text" id="nama" required placeholder="Masukkan nama Anda (Boleh Samaran)" 
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200 text-sm">
-                </div>
+                    <!-- Status Pelapor -->
+                    <div>
+                        <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status Pelapor <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="ph ph-identification-card text-gray-400 text-lg"></i>
+                            </div>
+                            <select id="status" name="status" required 
+                                class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-gray-50 focus:bg-white text-gray-800 appearance-none">
+                                <option value="" disabled selected>Pilih Status Anda...</option>
+                                <option value="Siswa">Siswa</option>
+                                <option value="Orang Tua / Wali Murid">Orang Tua / Wali Murid</option>
+                                <option value="Masyarakat Umum">Masyarakat Umum</option>
+                                <option value="Guru / Staf">Guru / Staf</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <i class="ph ph-caret-down text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
 
-                <!-- Input Status/Peran -->
-                <div class="mb-5">
-                    <label for="status" class="block text-sm font-medium text-gray-700 mb-2">Status / Peran</label>
-                    <select id="status" required 
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200 text-sm bg-white">
-                        <option value="" disabled selected>Pilih status Anda...</option>
-                        <option value="Siswa">Siswa</option>
-                        <option value="Guru / Staf">Guru / Staf</option>
-                        <option value="Orang Tua / Wali">Orang Tua / Wali</option>
-                        <option value="Masyarakat Umum">Masyarakat Umum</option>
-                    </select>
-                </div>
+                    <!-- Kategori Pengaduan -->
+                    <div>
+                        <label for="kategori" class="block text-sm font-medium text-gray-700 mb-1">Kategori Laporan <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="ph ph-tag text-gray-400 text-lg"></i>
+                            </div>
+                            <select id="kategori" name="kategori" required 
+                                class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-gray-50 focus:bg-white text-gray-800 appearance-none">
+                                <option value="" disabled selected>Pilih Kategori...</option>
+                                <option value="Fasilitas Sekolah">Fasilitas Sekolah (Gedung, Toilet, dll)</option>
+                                <option value="Proses Pembelajaran">Proses Pembelajaran</option>
+                                <option value="Bullying / Perundungan">Bullying / Perundungan</option>
+                                <option value="Kedisiplinan & Pelanggaran">Kedisiplinan & Pelanggaran</option>
+                                <option value="Saran & Masukan Lainnya">Saran & Masukan Lainnya</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <i class="ph ph-caret-down text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
 
-                <!-- Kategori Pengaduan -->
-                <div class="mb-5">
-                    <label for="kategori" class="block text-sm font-medium text-gray-700 mb-2">Kategori Laporan</label>
-                    <select id="kategori" required 
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200 text-sm bg-white">
-                        <option value="" disabled selected>Pilih kategori...</option>
-                        <option value="Fasilitas Sekolah">Fasilitas Sekolah (Gedung, Toilet, Kelas)</option>
-                        <option value="Akademik & Pembelajaran">Akademik & Pembelajaran</option>
-                        <option value="Perundungan (Bullying)">Perundungan (Bullying) / Keamanan</option>
-                        <option value="Pungutan Liar">Pungutan Liar</option>
-                        <option value="Lainnya">Lainnya</option>
-                    </select>
-                </div>
+                    <!-- Isi Pengaduan -->
+                    <div>
+                        <label for="pesan" class="block text-sm font-medium text-gray-700 mb-1">Isi Laporan / Pengaduan <span class="text-red-500">*</span></label>
+                        <textarea id="pesan" name="pesan" rows="5" required placeholder="Ceritakan secara detail kronologi atau hal yang ingin Anda sampaikan..." 
+                            class="w-full p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-gray-50 focus:bg-white text-gray-800 resize-y"></textarea>
+                    </div>
 
-                <!-- Isi Laporan -->
-                <div class="mb-6">
-                    <label for="laporan" class="block text-sm font-medium text-gray-700 mb-2">Isi Laporan / Pengaduan</label>
-                    <textarea id="laporan" rows="4" required placeholder="Jelaskan secara detail kejadian, waktu, atau informasi terkait laporan Anda..." 
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200 text-sm resize-none"></textarea>
-                </div>
-
-                <!-- Tombol Submit -->
-                <button type="submit" 
-                    class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3.5 px-4 rounded-lg flex items-center justify-center gap-2 transition duration-300 shadow-md transform hover:-translate-y-0.5">
-                    <i class="fab fa-whatsapp text-xl"></i>
-                    Kirim Laporan via WhatsApp
-                </button>
-            </form>
-
-            <div class="mt-6 text-center text-xs text-gray-500 flex items-center justify-center gap-2">
-                <i class="fas fa-shield-alt text-green-600"></i>
-                Laporan Anda akan dikirimkan secara langsung ke admin SDN 2 Kapar.
+                    <!-- Submit Button -->
+                    <button type="submit" 
+                        class="w-full bg-[#25D366] hover:bg-[#1da851] text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2 text-lg">
+                        <i class="ph ph-whatsapp-logo text-2xl"></i>
+                        Kirim via WhatsApp
+                    </button>
+                    
+                    <p class="text-center text-xs text-gray-500 mt-4 flex items-center justify-center gap-1">
+                        <i class="ph ph-lock-key"></i>
+                        Laporan akan dikirim ke WhatsApp Admin (0857-5398-7438)
+                    </p>
+                </form>
             </div>
         </div>
-    </div>
+    </main>
 
-    <!-- JavaScript untuk memproses form dan membuka WhatsApp -->
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 py-6 mt-auto">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <p class="text-sm font-semibold text-white mb-1">SDN 2 Kapar</p>
+            <p class="text-xs mb-3">Jalan Mufakat RT.3 Desa Kapar, Kec. Murung Pudak, Kab. Tabalong</p>
+            <hr class="border-gray-700 mb-3 w-1/2 mx-auto">
+            <p class="text-xs">&copy; <span id="year"></span> Layanan Pengaduan SDN 2 Kapar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript logic -->
     <script>
-        function kirimKeWhatsApp(event) {
-            // Mencegah halaman reload saat form disubmit
-            event.preventDefault();
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-            // Mengambil nilai dari form
-            const nama = document.getElementById('nama').value;
+        // Handle form submission
+        document.getElementById('pengaduanForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent page reload
+
+            // Get form values
+            const nama = document.getElementById('nama').value.trim();
             const status = document.getElementById('status').value;
             const kategori = document.getElementById('kategori').value;
-            const laporan = document.getElementById('laporan').value;
+            const pesan = document.getElementById('pesan').value.trim();
 
-            // Nomor tujuan WhatsApp
-            const nomorWhatsApp = "6285753987438";
+            // Destination WhatsApp Number (Format to 62...)
+            // Original: 085753987438 -> Format: 6285753987438
+            const waNumber = '6285753987438';
 
-            // Membuat format pesan teks mentah menggunakan enter standar (\n)
-            const pesanMentah = `*LAPORAN PENGADUAN*\n*SDN 2 KAPAR*\n-----------------------------------\n\n*Nama Pelapor:* ${nama}\n*Status/Peran:* ${status}\n*Kategori:* ${kategori}\n\n*Isi Laporan:*\n${laporan}\n\n-----------------------------------\n_Dikirim melalui Website Layanan Pengaduan._`;
+            // Construct the message
+            const message = `*PENGADUAN BARU - SDN 2 KAPAR*
+------------------------------------------------------
+*Nama Pelapor:* ${nama}
+*Status:* ${status}
+*Kategori Laporan:* ${kategori}
 
-            // Menerjemahkan pesan menjadi format URL yang sah agar tombol berfungsi
-            const encodedPesan = encodeURIComponent(pesanMentah);
+*Isi Laporan / Pengaduan:*
+${pesan}
+------------------------------------------------------
+_Pesan ini dikirim secara otomatis melalui Portal Pengaduan Web SDN 2 Kapar._`;
 
-            // Membuat link WhatsApp API
-            const linkWhatsApp = `https://wa.me/${nomorWhatsApp}?text=${encodedPesan}`;
+            // Encode the message for URL
+            const encodedMessage = encodeURIComponent(message);
 
-            // Membuka link WhatsApp di tab atau aplikasi WhatsApp
-            window.open(linkWhatsApp, '_blank');
-        }
+            // Construct WhatsApp URL
+            // Using wa.me API which works on both mobile and web
+            const whatsappUrl = `https://wa.me/${waNumber}?text=${encodedMessage}`;
+
+            // Open WhatsApp in a new tab/app
+            window.open(whatsappUrl, '_blank');
+        });
     </script>
 </body>
 </html>
-
 

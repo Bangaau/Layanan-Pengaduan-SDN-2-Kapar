@@ -112,27 +112,14 @@
             // Nomor tujuan WhatsApp
             const nomorWhatsApp = "6285753987438";
 
-            // Membuat format pesan teks mentah (menggunakan \n untuk enter biasa)
-            const pesanMentah = `*LAPORAN PENGADUAN*
-*SDN 2 KAPAR*
------------------------------------
+            // Membuat format pesan teks mentah menggunakan enter standar (\n)
+            const pesanMentah = `*LAPORAN PENGADUAN*\n*SDN 2 KAPAR*\n-----------------------------------\n\n*Nama Pelapor:* ${nama}\n*Status/Peran:* ${status}\n*Kategori:* ${kategori}\n\n*Isi Laporan:*\n${laporan}\n\n-----------------------------------\n_Dikirim melalui Website Layanan Pengaduan._`;
 
-*Nama Pelapor:* ${nama}
-*Status/Peran:* ${status}
-*Kategori:* ${kategori}
-
-*Isi Laporan:*
-${laporan}
-
------------------------------------
-_Dikirim melalui Website Layanan Pengaduan._`;
-
-            // Meng-encode seluruh pesan agar karakter seperti Enter (\n), spasi, dan simbol
-            // terbaca sempurna oleh sistem URL WhatsApp.
-            const pesanTer-encode = encodeURIComponent(pesanMentah);
+            // Menerjemahkan pesan menjadi format URL yang sah agar tombol berfungsi
+            const encodedPesan = encodeURIComponent(pesanMentah);
 
             // Membuat link WhatsApp API
-            const linkWhatsApp = `https://wa.me/${nomorWhatsApp}?text=${pesanTer-encode}`;
+            const linkWhatsApp = `https://wa.me/${nomorWhatsApp}?text=${encodedPesan}`;
 
             // Membuka link WhatsApp di tab atau aplikasi WhatsApp
             window.open(linkWhatsApp, '_blank');
